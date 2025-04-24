@@ -26,10 +26,11 @@ export default function Home() {
               <div className="mb-12">
                 <CountdownTimer />
               </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto">
                 <Button
                   href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
                   size="lg"
+                  className="flex-1"
                 >
                   RSVP Now
                 </Button>
@@ -37,8 +38,9 @@ export default function Home() {
                   href="https://www.instagram.com/tpucsd"
                   variant="outline" 
                   size="lg"
+                  className="flex-1"
                 >
-                  Follow @TPUCSD
+                  Follow TPUCSD
                 </Button>
               </div>
             </div>
