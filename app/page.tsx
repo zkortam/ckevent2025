@@ -104,7 +104,7 @@ export default function Home() {
                       <ul className="ml-4 mt-1 text-gray-300">
                         <li>
                           <a 
-                            href="https://www.google.com/maps/place/Gilman+Parking+Structure/@32.8801,-117.2414,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc06c4414caf4f:0xefb6a8c9bb301347!8m2!3d32.8801!4d-117.2414!16s%2Fg%2F11bw3x0q9c?entry=ttu" 
+                            href="https://www.google.com/maps/place/Gilman+Parking+Structure,+3100+Gilman+Dr,+La+Jolla,+CA+92093/@32.8773774,-117.2364275,16z/data=!3m1!4b1!4m6!3m5!1s0x80dc06c5218d55eb:0xd07cbfc872e378aa!8m2!3d32.8773774!4d-117.2338526!16s%2Fg%2F1tdkgyrr?entry=ttu"
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-red-500 hover:text-red-400 transition-colors"
@@ -114,7 +114,7 @@ export default function Home() {
                         </li>
                         <li>
                           <a 
-                            href="https://www.google.com/maps/place/Hopkins+Parking+Structure/@32.8801,-117.2414,17z/data=!3m1!4b1!4m6!3m5!1s0x80dc06c4414caf4f:0xefb6a8c9bb301347!8m2!3d32.8801!4d-117.2414!16s%2Fg%2F11bw3x0q9c?entry=ttu" 
+                            href="https://www.google.com/maps/place/Hopkins+Parking+Structure/@32.8831766,-117.2437058,16.87z/data=!4m15!1m8!3m7!1s0x80dc06c5218d55eb:0xd07cbfc872e378aa!2sGilman+Parking+Structure,+3100+Gilman+Dr,+La+Jolla,+CA+92093!3b1!8m2!3d32.8773774!4d-117.2338526!16s%2Fg%2F1tdkgyrr!3m5!1s0x80dc06c1e6156103:0xc6690b999c002d97!8m2!3d32.8837791!4d-117.2394026!16s%2Fg%2F1jky0r__3?entry=ttu"
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-red-500 hover:text-red-400 transition-colors"
