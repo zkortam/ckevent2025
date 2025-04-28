@@ -8,6 +8,9 @@ import FAQ from './components/FAQ';
 import CountdownTimer from './components/CountdownTimer';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import dynamic from 'next/dynamic';
+
+const MapSection = dynamic(() => import('./components/MapSection'), { ssr: false });
 
 export default function Home() {
   return (
@@ -176,42 +179,8 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center mb-8 text-white">On-Campus Dining</h2>
             <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">Explore UCSD's diverse on-campus restaurants by cuisine. Great options for visitors and students alike!</p>
-
-            {/* Map and Cards Shared Container */}
             <div className="max-w-6xl mx-auto px-2 sm:px-4">
-              <div className="mb-12">
-                <MapContainer 
-                  center={[32.8797, -117.237]} 
-                  zoom={16} 
-                  scrollWheelZoom={false} 
-                  style={{ 
-                    height: '300px', 
-                    width: '100%', 
-                    borderRadius: '1rem', 
-                    border: '2px solid #1f2937', 
-                  }}
-                  className="sm:h-[400px] md:h-[500px]"
-                >
-                  <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                    attribution="&copy; <a href='https://carto.com/attributions'>CARTO</a>"
-                  />
-                  {/* Event Pin */}
-                  <Marker position={[32.88045364967893, -117.23755937290522]} icon={eventIcon}>
-                    <Popup>
-                      <span className="font-bold text-red-500">Event Location</span>
-                    </Popup>
-                  </Marker>
-                  {/* Pins for each restaurant */}
-                  {diningLocations.map(({ name, position, link, icon }) => (
-                    <Marker key={name} position={position} icon={icon}>
-                      <Popup>
-                        <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline font-bold">{name}</a>
-                      </Popup>
-                    </Marker>
-                  ))}
-                </MapContainer>
-              </div>
+              <MapSection diningLocations={diningLocations} eventIcon={eventIcon} />
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 {/* Hispanic/Latin */}
                 <DiningCard
@@ -390,7 +359,7 @@ export default function Home() {
 }
 
 // DiningCard component
-function DiningCard({ icon, name, cuisine, link }) {
+function DiningCard({ icon, name, cuisine, link }: { icon: React.ReactNode; name: string; cuisine: string; link: string }) {
   return (
     <div className="flex flex-col items-center bg-gray-900/70 rounded-xl p-6 shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-200 border-2 border-gray-800">
       <div className="mb-4">{icon}</div>
@@ -401,6 +370,13 @@ function DiningCard({ icon, name, cuisine, link }) {
 }
 
 // Dining locations and icons
+type DiningLocation = {
+  name: string;
+  position: [number, number];
+  link: string;
+  icon: L.Icon;
+};
+
 const defaultIcon = new L.Icon({
   iconUrl: '/leaflet/marker-icon.png',
   shadowUrl: '/leaflet/marker-shadow.png',
@@ -419,7 +395,7 @@ const eventIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-const diningLocations = [
+const diningLocations: DiningLocation[] = [
   {
     name: 'Taco Villa',
     position: [32.876892, -117.2400931],
