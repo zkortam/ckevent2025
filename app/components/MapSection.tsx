@@ -1,23 +1,34 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Dynamically import the map components to avoid SSR issues
+// Fix for default marker icons
+const icon = L.icon({
+  iconUrl: '/leaflet/marker-icon.png',
+  iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+  shadowUrl: '/leaflet/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 const MapContainer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  () => import("react-leaflet").then((mod) => mod.MapContainer),
   { ssr: false }
 );
 const TileLayer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  () => import("react-leaflet").then((mod) => mod.TileLayer),
   { ssr: false }
 );
 const Marker = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Marker),
+  () => import("react-leaflet").then((mod) => mod.Marker),
   { ssr: false }
 );
 const Popup = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Popup),
+  () => import("react-leaflet").then((mod) => mod.Popup),
   { ssr: false }
 );
 
@@ -50,11 +61,11 @@ export default function MapSection({ diningLocations }: MapSectionProps) {
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
         {/* Event Location Marker */}
-        <Marker position={[32.8797, -117.2362]}>
+        <Marker position={[32.8797, -117.2362]} icon={icon}>
           <Popup>
             <div className="text-center">
               <h3 className="font-bold text-lg">Charlie Kirk Event</h3>
@@ -72,7 +83,7 @@ export default function MapSection({ diningLocations }: MapSectionProps) {
         </Marker>
         {/* Dining Location Markers */}
         {diningLocations.map((location, index) => (
-          <Marker key={index} position={location.position}>
+          <Marker key={index} position={location.position} icon={icon}>
             <Popup>
               <div className="text-center">
                 <h3 className="font-bold text-lg">{location.name}</h3>
