@@ -5,9 +5,7 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  experimental: {
-    serverActions: true,
-  },
+  transpilePackages: ['leaflet', 'react-leaflet'],
 }
 
 module.exports = nextConfig 

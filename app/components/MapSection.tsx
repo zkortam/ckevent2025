@@ -1,7 +1,25 @@
 "use client";
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+import React, { useEffect, useState } from "react";
+import dynamic from 'next/dynamic';
+import "leaflet/dist/leaflet.css";
+
+// Dynamically import the map components to avoid SSR issues
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Popup),
+  { ssr: false }
+);
 
 type DiningLocation = {
   name: string;
@@ -10,23 +28,29 @@ type DiningLocation = {
 };
 
 export default function MapSection({ diningLocations }: { diningLocations: DiningLocation[] }) {
-  // Create icons here (client-only)
-  const defaultIcon = new L.Icon({
-    iconUrl: '/leaflet/marker-icon.png',
-    shadowUrl: '/leaflet/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-  });
-  const eventIcon = new L.Icon({
-    iconUrl: '/leaflet/marker-icon-red.png',
-    shadowUrl: '/leaflet/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-  });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Fix for default marker icons in Leaflet
+    const fixLeafletIcons = async () => {
+      const L = (await import('leaflet')).default;
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+        iconUrl: '/leaflet/marker-icon.png',
+        shadowUrl: '/leaflet/marker-shadow.png',
+      });
+    };
+
+    fixLeafletIcons();
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] bg-gray-800 rounded-xl animate-pulse" />
+    );
+  }
 
   return (
     <div className="mb-12">
@@ -47,14 +71,14 @@ export default function MapSection({ diningLocations }: { diningLocations: Dinin
           attribution="&copy; <a href='https://carto.com/attributions'>CARTO</a>"
         />
         {/* Event Pin */}
-        <Marker position={[32.88045364967893, -117.23755937290522]} icon={eventIcon}>
+        <Marker position={[32.88045364967893, -117.23755937290522]}>
           <Popup>
             <span className="font-bold text-red-500">Event Location</span>
           </Popup>
         </Marker>
         {/* Pins for each restaurant */}
         {diningLocations.map(({ name, position, link }) => (
-          <Marker key={name} position={position as [number, number]} icon={defaultIcon}>
+          <Marker key={name} position={position}>
             <Popup>
               <a
                 href={link}

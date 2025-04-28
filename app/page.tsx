@@ -9,7 +9,10 @@ import CountdownTimer from './components/CountdownTimer';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import dynamic from 'next/dynamic';
 
-const MapSection = dynamic(() => import('./components/MapSection'), { ssr: false });
+const MapSection = dynamic(() => import('./components/MapSection'), {
+  ssr: false,
+  loading: () => <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] bg-gray-800 rounded-xl animate-pulse" />
+});
 
 export default function Home() {
   return (
@@ -371,23 +374,98 @@ function DiningCard({ icon, name, cuisine, link }: { icon: React.ReactNode; name
 // Dining locations and icons
 const diningLocations = [
   {
-    name: "64 Degrees",
-    position: [32.8797, -117.237] as [number, number],
-    link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=64",
+    name: "Plant Power Fast Food",
+    position: [32.8808945, -117.2413927] as [number, number],
+    link: "https://www.google.com/maps/place/Plant+Power+Fast+Food/@32.880554,-117.2410037,3a,75y/data=!3m8!1e2!3m6!1sAF1QipNzIIRI1ZonGywJRbQew8FjnIhsfZJ1TevppUdg!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fp%2FAF1QipNzIIRI1ZonGywJRbQew8FjnIhsfZJ1TevppUdg%3Dw203-h152-k-no!7i4608!8i3456!4m7!3m6!1s0x80dc071378ac2bbd:0x3a3c920b3ccf98f3!8m2!3d32.8808945!4d-117.2413927!10e5!16s%2Fg%2F11nnm3r2_j?entry=ttu",
   },
   {
-    name: "Pines",
-    position: [32.8776, -117.239] as [number, number],
-    link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=pn",
+    name: "Shōwa Ramen",
+    position: [32.8809105, -117.2408997] as [number, number],
+    link: "https://www.google.com/maps/place/Sh%C5%8Dwa+Ramen/@32.880554,-117.2410037,20z/data=!4m6!3m5!1s0x80dc07b711210d47:0x61e19a8f7935df75!8m2!3d32.8809105!4d-117.2408997!16s%2Fg%2F11swypgs8v?entry=ttu",
   },
   {
-    name: "Canyon Vista",
-    position: [32.8755, -117.241] as [number, number],
-    link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=cv",
+    name: "Tahini",
+    position: [32.8807115, -117.2408507] as [number, number],
+    link: "https://www.google.com/maps/place/Tahini+Authentic+Middle+Eastern+Street+Food/@32.880554,-117.2410037,20z/data=!4m6!3m5!1s0x80dc07b479ebf95d:0xdde5e5d57fa835dd!8m2!3d32.8807115!4d-117.2408507!16s%2Fg%2F11k3h44tsv?entry=ttu",
   },
   {
-    name: "Foodworx",
-    position: [32.8762, -117.234] as [number, number],
-    link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=fw",
+    name: "Blue Bowl",
+    position: [32.8804876, -117.2408485] as [number, number],
+    link: "https://www.google.com/maps/place/Blue+Bowl+Superfoods/@32.880554,-117.2410037,20z/data=!4m6!3m5!1s0x80dc07c0207ce53d:0xb9b3236545265ee5!8m2!3d32.8804876!4d-117.2408485!16s%2Fg%2F11nlfqq99q?entry=ttu",
   },
+  {
+    name: "Fan Fan",
+    position: [32.8800633, -117.2409288] as [number, number],
+    link: "https://www.google.com/maps/place/Fan-Fan/@32.8801316,-117.240997,20z/data=!4m6!3m5!1s0x80dc073af40fa38b:0xe8bbf115f76844a3!8m2!3d32.8800633!4d-117.2409288!16s%2Fg%2F11qg9lmgk1?entry=ttu",
+  },
+  {
+    name: "Blue Pepper",
+    position: [32.8772635, -117.2402513] as [number, number],
+    link: "https://www.google.com/maps/place/Blue+Pepper+Asian+Cuisine+-+UCSD/@32.8780701,-117.2403775,18.52z/data=!4m6!3m5!1s0x80dc06d869a3c4bd:0x79ae6a8846b75d59!8m2!3d32.8772635!4d-117.2402513!16s%2Fg%2F1thf8vvd?entry=ttu",
+  },
+  {
+    name: "Taco Villa",
+    position: [32.876892, -117.2400931] as [number, number],
+    link: "https://www.google.com/maps/place/Taco+Villa/@32.8780701,-117.2403775,18.52z/data=!3m1!5s0x80dc06c6f21566e7:0x3aca64cd90ac6c71!4m6!3m5!1s0x80dc06c6f1ed8869:0xc4c54c2210bb8e96!8m2!3d32.876892!4d-117.2400931!16s%2Fg%2F11bzr7mmtv?entry=ttu",
+  },
+  {
+    name: "Shores Diner",
+    position: [32.8771004, -117.2395588] as [number, number],
+    link: "https://www.google.com/maps/place/Shores+Diner/@32.8780701,-117.2403775,18.52z/data=!4m6!3m5!1s0x80dc070071127b6b:0x8d8e811672394108!8m2!3d32.8771004!4d-117.2395588!16s%2Fg%2F11y3yhnhn6?entry=ttu",
+  },
+  {
+    name: "Dirty Birds",
+    position: [32.8800597, -117.2367173] as [number, number],
+    link: "https://www.google.com/maps/place/Dirty+Birds+La+Jolla/@32.879518,-117.2369763,18.61z/data=!4m6!3m5!1s0x80dc07c1529c061d:0x41b27d96d6d5c640!8m2!3d32.8800597!4d-117.2367173!16s%2Fg%2F11rhd_dqdh?entry=ttu",
+  },
+  {
+    name: "Starbucks",
+    position: [32.8798977, -117.2363369] as [number, number],
+    link: "https://www.google.com/maps/place/Starbucks/@32.879518,-117.2369763,18.61z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06c38bc41147:0x89de2fc7300fc6d7!8m2!3d32.8798977!4d-117.2363369!16s%2Fg%2F11bwymkpc3?entry=ttu",
+  },
+  {
+    name: "Burger King",
+    position: [32.8800926, -117.2359201] as [number, number],
+    link: "https://www.google.com/maps/place/Burger+King/@32.8796643,-117.2366848,19.16z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06da95555555:0x66fa2f04c194bb55!8m2!3d32.8800926!4d-117.2359201!16s%2Fg%2F1tddy1pm?entry=ttu",
+  },
+  {
+    name: "Panda Express",
+    position: [32.8797279, -117.2363977] as [number, number],
+    link: "https://www.google.com/maps/place/Panda+Express/@32.8796643,-117.2366848,19.16z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06d869a3c4bd:0x22c1afa9856ecf25!8m2!3d32.8797279!4d-117.2363977!16s%2Fg%2F1wv_sh_y?entry=ttu",
+  },
+  {
+    name: "The Loft",
+    position: [32.8796069, -117.2358855] as [number, number],
+    link: "https://www.google.com/maps/place/Zanzibar+Cafe+At+the+Loft/@32.8796666,-117.2364375,19.85z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06d869a3c4bd:0x4bcc04871616730f!8m2!3d32.8796069!4d-117.2358855!16s%2Fg%2F1tjdgh8q?entry=ttu",
+  },
+  {
+    name: "Curry Up Now",
+    position: [32.8797545, -117.2360322] as [number, number],
+    link: "https://www.google.com/maps/place/Curry+Up+Now/@32.8797382,-117.2363948,20.41z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc07f8a600b4a5:0x217d7219f068c317!8m2!3d32.8797545!4d-117.2360322!16s%2Fg%2F11sx291x7r?entry=ttu",
+  },
+  {
+    name: "Santorini",
+    position: [32.8797561, -117.2356982] as [number, number],
+    link: "https://www.google.com/maps/place/Santorini+Greek+Island+Grill/@32.8797195,-117.2358748,20.41z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06d869a3c4bd:0x54249e3da300e0b0!8m2!3d32.8797561!4d-117.2356982!16s%2Fg%2F1tdvvlyv?entry=ttu",
+  },
+  {
+    name: "Tapioca Express",
+    position: [32.8796317, -117.2356142] as [number, number],
+    link: "https://www.google.com/maps/place/Tapioca+Express/@32.8797195,-117.2358748,20.41z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06c477f24e0f:0xabc52cac6c7e03dd!8m2!3d32.8796317!4d-117.2356142!16s%2Fg%2F1tfwdsw2?entry=ttu",
+  },
+  {
+    name: "Subway",
+    position: [32.8795592, -117.2358084] as [number, number],
+    link: "https://www.google.com/maps/place/Subway/@32.8797811,-117.235901,20.16z/data=!4m6!3m5!1s0x80dc06d869a3c4bd:0x3fc260aa3877e212!8m2!3d32.8795592!4d-117.2358084!16s%2Fg%2F1tfm6z1_?entry=ttu",
+  },
+  {
+    name: "Jamba",
+    position: [32.87995, -117.23682] as [number, number],
+    link: "https://www.google.com/maps/place/Jamba+UCSD/@32.8796804,-117.2369716,20.16z/data=!3m1!5s0x80dc06c4740ccfc9:0x3132a4b07ec421f8!4m6!3m5!1s0x80dc06d869a3c4bd:0x2e66015f9354a4f7!8m2!3d32.87995!4d-117.23682!16s%2Fg%2F1tggb820?entry=ttu",
+  },
+  {
+    name: "Croutons",
+    position: [32.8785489, -117.235762] as [number, number],
+    link: "https://www.google.com/maps/place/Croutons/@32.8786937,-117.2368134,19.13z/data=!4m6!3m5!1s0x80dc06c45b643ae1:0x9af00a58c6adff0f!8m2!3d32.8785489!4d-117.235762!16s%2Fg%2F11clvfbl5z?entry=ttu",
+  }
 ]; 
