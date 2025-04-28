@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-black">
+      <main className="min-h-screen bg-black pt-[50px] md:pt-0">
         {/* Hero Section */}
         <section className="relative h-screen bg-black flex items-center">
           <div className="absolute inset-0 bg-black/80"></div>

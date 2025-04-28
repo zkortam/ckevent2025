@@ -1,20 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
+
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Fix for default marker icons
-const icon = L.icon({
-  iconUrl: '/leaflet/marker-icon.png',
-  iconRetinaUrl: '/leaflet/marker-icon-2x.png',
-  shadowUrl: '/leaflet/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
+// Dynamically import Leaflet components to avoid SSR issues
 const MapContainer = dynamic(
   () => import("react-leaflet").then((mod) => mod.MapContainer),
   { ssr: false }
@@ -40,6 +31,27 @@ interface MapSectionProps {
   }[];
 }
 
+// Fix for default marker icons
+const defaultIcon = L.icon({
+  iconUrl: '/leaflet/marker-icon.png',
+  iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+  shadowUrl: '/leaflet/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+const eventIcon = L.icon({
+  iconUrl: '/leaflet/marker-icon-red.png',
+  iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+  shadowUrl: '/leaflet/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 export default function MapSection({ diningLocations }: MapSectionProps) {
   const [mounted, setMounted] = useState(false);
 
@@ -49,14 +61,14 @@ export default function MapSection({ diningLocations }: MapSectionProps) {
 
   if (!mounted) {
     return (
-      <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] bg-gray-800 rounded-xl animate-pulse" />
+      <div className="h-[500px] w-full bg-gray-800 rounded-xl animate-pulse" />
     );
   }
 
   return (
-    <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[500px] xl:h-[500px] rounded-xl overflow-hidden">
+    <div className="h-[500px] w-full rounded-xl overflow-hidden">
       <MapContainer
-        center={[32.8797, -117.2362]}
+        center={[32.88039547516385, -117.2375514080194]}
         zoom={16}
         style={{ height: "100%", width: "100%" }}
       >
@@ -65,28 +77,27 @@ export default function MapSection({ diningLocations }: MapSectionProps) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
         {/* Event Location Marker */}
-        <Marker position={[32.8797, -117.2362]} icon={icon}>
+        <Marker
+          position={[32.88039547516385, -117.2375514080194]}
+          icon={eventIcon}
+        >
           <Popup>
             <div className="text-center">
-              <h3 className="font-bold text-lg">Charlie Kirk Event</h3>
-              <p>Geisel Library, UCSD</p>
-              <a
-                href="https://www.google.com/maps/place/Geisel+Library/@32.8797,-117.2362,17z"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                View on Google Maps
-              </a>
+              <h3 className="font-bold text-red-500">Charlie Kirk Event</h3>
+              <p>Geisel Library</p>
             </div>
           </Popup>
         </Marker>
         {/* Dining Location Markers */}
-        {diningLocations.map((location, index) => (
-          <Marker key={index} position={location.position} icon={icon}>
+        {diningLocations.map((location) => (
+          <Marker
+            key={location.name}
+            position={location.position}
+            icon={defaultIcon}
+          >
             <Popup>
               <div className="text-center">
-                <h3 className="font-bold text-lg">{location.name}</h3>
+                <h3 className="font-bold">{location.name}</h3>
                 <a
                   href={location.link}
                   target="_blank"
