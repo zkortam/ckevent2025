@@ -372,22 +372,22 @@ function DiningCard({ icon, name, cuisine, link }: { icon: React.ReactNode; name
 const diningLocations = [
   {
     name: "64 Degrees",
-    position: [32.8797, -117.237],
+    position: [32.8797, -117.237] as [number, number],
     link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=64",
   },
   {
     name: "Pines",
-    position: [32.8776, -117.239],
+    position: [32.8776, -117.239] as [number, number],
     link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=pn",
   },
   {
     name: "Canyon Vista",
-    position: [32.8755, -117.241],
+    position: [32.8755, -117.241] as [number, number],
     link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=cv",
   },
   {
     name: "Foodworx",
-    position: [32.8762, -117.234],
+    position: [32.8762, -117.234] as [number, number],
     link: "https://hdh.ucsd.edu/DiningMenus/default.aspx?i=fw",
   },
 ]; 
