@@ -48,7 +48,7 @@ export default function Header() {
           </div>
         </nav>
       </div>
-      <div className={`w-full bg-red-700 text-white text-center py-2 text-sm font-semibold tracking-wide shadow-md z-50 transition-opacity duration-300 ${showBar ? 'opacity-50' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`w-full bg-red-700 text-white text-center py-2 text-sm font-semibold tracking-wide shadow-md z-40 transition-opacity duration-300 ${showBar ? 'opacity-50' : 'opacity-0 pointer-events-none'}`}>
         <a href="/statement" className="hover:underline">Statement for UCSD Students</a>
       </div>
     </header>

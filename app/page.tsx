@@ -183,7 +183,7 @@ export default function Home() {
             <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">Explore UCSD's diverse on-campus restaurants by cuisine. Great options for visitors and students alike!</p>
             <div className="max-w-6xl mx-auto px-2 sm:px-4">
               <MapSection diningLocations={diningLocations} />
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 {/* Hispanic/Latin */}
                 <DiningCard
                   icon={<FireIcon className="h-8 w-8 text-orange-400" />}
