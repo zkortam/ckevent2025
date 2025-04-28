@@ -7,10 +7,27 @@ type DiningLocation = {
   name: string;
   position: [number, number];
   link: string;
-  icon: L.Icon;
 };
 
-export default function MapSection({ diningLocations, eventIcon }: { diningLocations: DiningLocation[]; eventIcon: L.Icon }) {
+export default function MapSection({ diningLocations }: { diningLocations: DiningLocation[] }) {
+  // Create icons here (client-only)
+  const defaultIcon = new L.Icon({
+    iconUrl: '/leaflet/marker-icon.png',
+    shadowUrl: '/leaflet/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
+  const eventIcon = new L.Icon({
+    iconUrl: '/leaflet/marker-icon-red.png',
+    shadowUrl: '/leaflet/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
+
   return (
     <div className="mb-12">
       <MapContainer
@@ -36,8 +53,8 @@ export default function MapSection({ diningLocations, eventIcon }: { diningLocat
           </Popup>
         </Marker>
         {/* Pins for each restaurant */}
-        {diningLocations.map(({ name, position, link, icon }) => (
-          <Marker key={name} position={position} icon={icon}>
+        {diningLocations.map(({ name, position, link }) => (
+          <Marker key={name} position={position as [number, number]} icon={defaultIcon}>
             <Popup>
               <a
                 href={link}
