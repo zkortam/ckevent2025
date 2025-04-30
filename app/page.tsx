@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { MapPinIcon, CalendarIcon, ClockIcon, ArrowDownIcon, FireIcon, GlobeEuropeAfricaIcon, GlobeAsiaAustraliaIcon, HomeModernIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Button from './components/Button';
 import FAQ from './components/FAQ';
 import CountdownTimer from './components/CountdownTimer';
+import BackgroundEffects from './components/BackgroundEffects';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import dynamic from 'next/dynamic';
 
@@ -22,18 +24,44 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative h-screen bg-black flex items-center">
           <div className="absolute inset-0 bg-black/80"></div>
-          <div className="container mx-auto px-4 relative z-10">
+          <BackgroundEffects />
+          <motion.div 
+            className="container mx-auto px-4 relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              <motion.h1 
+                className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Charlie Kirk at UCSD
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-12">
+              </motion.h1>
+              <motion.p 
+                className="text-xl md:text-2xl text-gray-300 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 Join us for The American Comeback Tour at UC San Diego - An engaging discussion about our nation's future
-              </p>
-              <div className="mb-12">
+              </motion.p>
+              <motion.div 
+                className="mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
                 <CountdownTimer />
-              </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto">
+              </motion.div>
+              <motion.div 
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
                 <Button
                   href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
                   size="lg"
@@ -49,35 +77,68 @@ export default function Home() {
                 >
                   Follow TPUCSD
                 </Button>
-              </div>
+              </motion.div>
             </div>
-          </div>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          </motion.div>
+          <motion.div 
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
             <ArrowDownIcon className="h-8 w-8 text-white" />
-          </div>
+          </motion.div>
         </section>
 
         {/* Event Details */}
         <section id="event-details" className="py-24 bg-black">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-16 text-white">Event Details</h2>
+            <motion.h2 
+              className="text-4xl font-bold text-center mb-16 text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              Event Details
+            </motion.h2>
             <div className="grid md:grid-cols-3 gap-12">
-              <div className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300">
+              <motion.div 
+                className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <CalendarIcon className="h-12 w-12 text-red-500 mb-6" />
                 <h3 className="text-xl font-semibold mb-2 text-white">Date</h3>
                 <p className="text-gray-300">May 1st, 2025</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300">
+              </motion.div>
+              <motion.div 
+                className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <ClockIcon className="h-12 w-12 text-red-500 mb-6" />
                 <h3 className="text-xl font-semibold mb-2 text-white">Time</h3>
                 <p className="text-gray-300">12:00 PM PST</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300">
+              </motion.div>
+              <motion.div 
+                className="flex flex-col items-center text-center p-8 rounded-xl border-4 border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-colors duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <MapPinIcon className="h-12 w-12 text-red-500 mb-6" />
                 <h3 className="text-xl font-semibold mb-2 text-white">Location</h3>
-                <p className="text-gray-300">Geisel Library</p>
+                <p className="text-gray-300">UCSD Town Square</p>
                 <p className="text-gray-300">UC San Diego</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -315,47 +376,144 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 bg-black">
+        <motion.section 
+          id="about" 
+          className="py-24 bg-black"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl font-bold mb-8 text-white">About the Event</h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <motion.h2 
+                className="text-4xl font-bold mb-8 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                About the Event
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-gray-300 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Join Charlie Kirk, founder and executive director of Turning Point USA, for an engaging discussion at UC San Diego. This outdoor event provides a unique opportunity to interact, ask questions, and engage in meaningful dialogue about current issues affecting our nation and campus community.
-              </p>
-              <p className="text-xl text-gray-300 leading-relaxed">
+              </motion.p>
+              <motion.p 
+                className="text-xl text-gray-300 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 Whether you're a UCSD student or a member of the broader San Diego community, this event promises to be an enlightening experience on one of California's most beautiful university campuses.
-              </p>
+              </motion.p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* FAQ Section */}
-        <FAQ />
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <FAQ />
+        </motion.div>
 
         {/* CTA Section */}
-        <section className="py-24 bg-black">
+        <motion.section 
+          className="py-24 bg-black"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold text-white mb-8">Ready to Join Us?</h2>
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-              Don't miss this opportunity to be part of an engaging discussion about America's future. Register now to secure your spot.
-            </p>
-            <Button
-              href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
-              size="lg"
+            <motion.h2 
+              className="text-4xl font-bold text-white mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              Register for the Event
-            </Button>
+              Ready to Join Us?
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Don't miss this opportunity to be part of an engaging discussion about America's future. Register now to secure your spot.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Button
+                href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
+                size="lg"
+              >
+                Register for the Event
+              </Button>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
+
+        {/* Map Section */}
+        <motion.section 
+          className="py-24 bg-black relative z-0"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <div className="container mx-auto px-4">
+            <motion.h2 
+              className="text-4xl font-bold text-center mb-16 text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              Location
+            </motion.h2>
+            <motion.div 
+              className="rounded-xl overflow-hidden shadow-2xl relative z-0"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <MapSection diningLocations={diningLocations} />
+            </motion.div>
+          </div>
+        </motion.section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 py-12">
+      <motion.footer 
+        className="bg-black text-gray-400 py-12"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+      >
         <div className="container mx-auto px-4 text-center">
           <p className="mb-4">© 2024 TPUSA at UCSD. All rights reserved.</p>
           <p>Event organized by Turning Point USA at UC San Diego</p>
         </div>
-      </footer>
+      </motion.footer>
     </>
   );
 }
