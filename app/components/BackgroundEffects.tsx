@@ -1,9 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function BackgroundEffects() {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    // Set initial dimensions
+    setDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    // Update dimensions on resize
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Animated grid lines */}
@@ -27,25 +48,25 @@ export default function BackgroundEffects() {
       </div>
 
       {/* Floating particles */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {dimensions.width > 0 && dimensions.height > 0 && Array.from({ length: 20 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-red-500/20 rounded-full"
           initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * dimensions.width,
+            y: Math.random() * dimensions.height,
             scale: Math.random() * 2 + 1,
           }}
           animate={{
             x: [
-              Math.random() * window.innerWidth,
-              Math.random() * window.innerWidth,
-              Math.random() * window.innerWidth,
+              Math.random() * dimensions.width,
+              Math.random() * dimensions.width,
+              Math.random() * dimensions.width,
             ],
             y: [
-              Math.random() * window.innerHeight,
-              Math.random() * window.innerHeight,
-              Math.random() * window.innerHeight,
+              Math.random() * dimensions.height,
+              Math.random() * dimensions.height,
+              Math.random() * dimensions.height,
             ],
             scale: [1, Math.random() * 2 + 1, 1],
           }}
