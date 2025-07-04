@@ -1,1 +1,5 @@
-{}
+{
+  "/page": "app/page.js",
+  "/past-statements/page": "app/past-statements/page.js",
+  "/statement/page": "app/statement/page.js"
+}

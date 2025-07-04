@@ -46,7 +46,7 @@ export default function MobileMenu() {
               <XMarkIcon className="h-6 w-6" />
             </button>
           </div>
-          <nav className="space-y-3">
+          <nav className="space-y-4">
             {isEventPage ? (
               <>
                 <Button href="#event-details" variant="secondary" size="sm" className="w-full">

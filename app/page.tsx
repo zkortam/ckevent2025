@@ -24,7 +24,7 @@ export default function Home() {
             }}></div>
           </div>
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-5xl mx-auto">
               <motion.div 
                 className="text-center"
@@ -34,7 +34,7 @@ export default function Home() {
               >
                 {/* Refined Typography */}
                 <motion.h1 
-                  className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[0.9] tracking-tight"
+                  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[0.9] tracking-tight"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -47,7 +47,7 @@ export default function Home() {
                 
                 {/* Clear Hierarchy - Sub-head */}
                 <motion.p 
-                  className="text-xl md:text-2xl lg:text-3xl text-gray-400 mb-12 font-light leading-relaxed max-w-4xl mx-auto"
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-400 mb-12 font-light leading-relaxed max-w-4xl mx-auto"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
