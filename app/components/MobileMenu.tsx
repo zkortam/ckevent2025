@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Button from './Button';
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Different navigation based on current page
+  const isEventPage = pathname === '/event';
 
   return (
     <div className="md:hidden">
@@ -42,26 +47,61 @@ export default function MobileMenu() {
             </button>
           </div>
           <nav className="space-y-3">
-            <Button href="#event-details" variant="secondary" size="sm" className="w-full">
-              Event Details
-            </Button>
-            <Button href="#parking" variant="secondary" size="sm" className="w-full">
-              Parking
-            </Button>
-            <Button href="#about" variant="secondary" size="sm" className="w-full">
-              About
-            </Button>
-            <Button href="#faq" variant="secondary" size="sm" className="w-full">
-              FAQ
-            </Button>
-            <Button
-              href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
-              variant="primary"
-              size="sm"
-              className="w-full"
-            >
-              RSVP Now
-            </Button>
+            {isEventPage ? (
+              <>
+                <Button href="#event-details" variant="secondary" size="sm" className="w-full">
+                  Event Details
+                </Button>
+                <Button href="#parking" variant="secondary" size="sm" className="w-full">
+                  Parking
+                </Button>
+                <Button href="#about" variant="secondary" size="sm" className="w-full">
+                  About
+                </Button>
+                <Button href="#faq" variant="secondary" size="sm" className="w-full">
+                  FAQ
+                </Button>
+                <Button
+                  href="https://events2022.tpusa.com/events/the-american-comeback-tour-at-the-university-of-california-san-diego"
+                  variant="primary"
+                  size="sm"
+                  className="w-full"
+                >
+                  RSVP Now
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button href="#about" variant="secondary" size="sm" className="w-full">
+                  About
+                </Button>
+                <Button href="#activities" variant="secondary" size="sm" className="w-full">
+                  Activities
+                </Button>
+                <Button href="#values" variant="secondary" size="sm" className="w-full">
+                  Values
+                </Button>
+                <Button href="#join-us" variant="secondary" size="sm" className="w-full">
+                  Join Us
+                </Button>
+                <Button
+                  href="/event"
+                  variant="secondary"
+                  size="sm"
+                  className="w-full"
+                >
+                  Current Events
+                </Button>
+                <Button
+                  href="https://www.instagram.com/tpucsd"
+                  variant="primary"
+                  size="sm"
+                  className="w-full"
+                >
+                  Follow Us
+                </Button>
+              </>
+            )}
           </nav>
         </div>
       </div>
